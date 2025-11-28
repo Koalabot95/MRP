@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "1c80c33d-cd1e-45f8-b9d9-51091ad3c4ce",
+		"name": "My Collection",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50138698",
+		"_collection_link": "https://koalabot95-5684398.postman.co/workspace/Koalabot95's-Workspace~1bc03c8d-3f0c-4dbf-8bd4-84499b76816d/collection/50138698-1c80c33d-cd1e-45f8-b9d9-51091ad3c4ce?action=share&source=collection_link&creator=50138698"
+	},
+	"item": [
+		{
+			"name": "User Registrieren",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"testuser\",\r\n  \"fullname\": \"Max Mustermann\",\r\n  \"email\": \"test@example.com\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12000/users/registration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"users",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12000/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User-Entry",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"testuser\",\r\n  \"fullname\": \"Max Mustermann\",\r\n  \"email\": \"test@example.com\",\r\n  \"password\": \"1234\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:12000/users/testuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"users",
+						"testuser"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Ändere Mailadresse",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"newmail@example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12000/users/testuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"users",
+						"testuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lösche User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"newmail@example.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:12000/users/testuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"users",
+						"testuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Media-Entry",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Der Klient\",\r\n    \"description\": \"Antwaltsdrama\",\r\n    \"type\": \"Film\",\r\n    \"releaseYear\": 1994,\r\n    \"genres\": \"Drama\",\r\n    \"ageRestriction\": 12\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12000/media",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"media"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Media Entrys",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12000/media",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"media"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Specific Media-Entry",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12000/media/1?Authorization=Bearer {{authToken}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"media",
+						"1"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer {{authToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Media-Entry",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Updated description!\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12000/media/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"media",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Media Entry",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12000/media/1?Authorization=Bearer {{authToken}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"media",
+						"1"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer {{authToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12000/version",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"version"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
