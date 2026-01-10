@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"testuser\",\r\n  \"fullname\": \"Max Mustermann\",\r\n  \"email\": \"test@example.com\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+					"raw": "{\r\n  \"username\": \"testuserin\",\r\n  \"fullname\": \"Max Mustermann\",\r\n  \"email\": \"test@example.com\",\r\n  \"password\": \"1234\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -196,7 +196,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Der Klient\",\r\n    \"description\": \"Antwaltsdrama\",\r\n    \"type\": \"Film\",\r\n    \"releaseYear\": 1994,\r\n    \"genres\": \"Drama\",\r\n    \"ageRestriction\": 12\r\n}\r\n",
+					"raw": "{\r\n    \"title\": \"Der Klient\",\r\n    \"description\": \"Antwaltsdrama\",\r\n    \"type\": \"movie\",\r\n    \"releaseYear\": 1994,\r\n    \"genres\": \"Drama\",\r\n    \"ageRestriction\": 12\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -322,6 +322,252 @@
 							"key": "Authorization",
 							"value": "Bearer {{authToken}}"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Rating",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json();\r",
+							"pm.environment.set(\"ratingId\", res.id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stars\": 5,\r\n  \"comment\": \"Absolut top\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12000/media/1/ratings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"media",
+						"1",
+						"ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Rating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12000/ratings/{{ratingId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"ratings",
+						"{{ratingId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like Rating",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12000/ratings/{{ratingId}}/likes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"ratings",
+						"{{ratingId}}",
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Like",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12000/ratings/{{ratingId}}/likes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"ratings",
+						"{{ratingId}}",
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mark Media as Fav",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12000/media/1/favorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"media",
+						"1",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Media as Fav",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12000/media/1/favorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"media",
+						"1",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Favs from User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12000/favorites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12000",
+					"path": [
+						"favorites"
 					]
 				}
 			},
